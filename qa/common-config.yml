@@ -1,0 +1,21 @@
+services:
+  account_qa_profile_service:
+    extends:
+      file: ../default/docker-compose.yml
+      service: accounts
+    environment:
+      SPRING_PROFILES_ACTIVE: qa
+
+  card_qa_profile_service:
+    extends:
+      file: ../default/docker-compose.yml
+      service: cards
+    environment:
+      SPRING_PROFILES_ACTIVE: qa
+
+  loan_qa_profile_service:
+    extends:
+      file: ../default/docker-compose.yml
+      service: loans
+    environment:
+      SPRING_PROFILES_ACTIVE: qa

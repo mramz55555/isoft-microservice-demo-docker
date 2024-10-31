@@ -1,0 +1,36 @@
+services:
+  network-deploy-service:
+    networks:
+      - inet
+
+  microservice-db-config:
+    extends:
+      service: network-deploy-service
+    image: mysql
+    healthcheck:
+      test: "mysqladmin ping -h localhost"
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      SPRING_RABBITMQ_HOST: "rabbit"
+
+  microservice-base-config:
+    extends:
+      service: network-deploy-service
+    deploy:
+      resources:
+        limits:
+          memory: 600m
+
+  microservice-clients-config:
+    extends:
+      service: microservice-base-config
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8070/"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8080/eureka/"

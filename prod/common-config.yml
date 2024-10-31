@@ -1,0 +1,21 @@
+services:
+  account_prod_profile_service:
+    extends:
+      file: ../default/docker-compose.yml
+      service: accounts
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+  card_prod_profile_service:
+    extends:
+      file: ../default/docker-compose.yml
+      service: cards
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+  loan_prod_profile_service:
+    extends:
+      file: ../default/docker-compose.yml
+      service: loans
+    environment:
+      SPRING_PROFILES_ACTIVE: prod

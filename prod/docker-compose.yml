@@ -1,0 +1,50 @@
+services:
+
+  accountsdb:
+    extends:
+      file: ../default/docker-compose.yml
+      service: accountsdb
+
+  loansdb:
+    extends:
+      file: ../default/docker-compose.yml
+      service: loansdb
+
+  cardsdb:
+    extends:
+      file: ../default/docker-compose.yml
+      service: cardsdb
+
+  configserver:
+    extends:
+      file: ../default/docker-compose.yml
+      service: configserver
+
+  eurekaserver:
+    extends:
+      file: ../default/docker-compose.yml
+      service: eurekaserver
+
+  accounts:
+    extends:
+      file: common-config.yml
+      service: account_prod_profile_service
+
+  loans:
+    extends:
+      file: common-config.yml
+      service: loan_prod_profile_service
+
+  cards:
+    extends:
+      file: common-config.yml
+      service: card_prod_profile_service
+
+  gatewayserver:
+    extends:
+      file: ../default/docker-compose.yml
+      service: gatewayserver
+
+networks:
+  inet:
+    driver: "bridge"
